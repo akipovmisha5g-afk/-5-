@@ -1,0 +1,31 @@
+class Weapon:
+    
+    def __init__(self, name, dmg):
+        self.name = name
+        self.dmg = dmg
+        
+    def use(self, monster):
+        monster.take_damage(self.dmg)
+
+class SilverSword(Weapon):
+    def __init__(self): super().__init__("Серебряный меч", 30)
+    def use(self, monster):
+        print(f"Удар {self.name}ом!")
+        super().use(monster)
+
+class HolyWater(Weapon):
+    def __init__(self): super().__init__("Святая вода", 20)
+    def use(self, monster):
+        print(f"Обливаем {self.name}ой!")
+        super().use(monster)
+
+class CrossbowBolt(Weapon):
+    def __init__(self): super().__init__("Арбалетный болт", 25)
+    def use(self, monster):
+        print(f"Выстрел из арбалета!")
+        super().use(monster)
+
+weapons = [SilverSword(), HolyWater(), CrossbowBolt()]
+zombie = Zombie("Зомби")
+for w in weapons:
+    w.use(zombie)
