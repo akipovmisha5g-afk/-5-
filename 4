@@ -1,0 +1,39 @@
+class Hunter:
+
+    def __init__(self, name):
+        self.__name = name
+        self._hp = 100
+        self.__weapons = []
+        
+    def get_name(self): return self.__name
+    def get_hp(self): return self._hp
+    def set_hp(self, value): self._hp = max(0, value)
+    def is_alive(self): return self._hp > 0
+    def take_damage(self, dmg):
+        self.set_hp(self._hp - dmg)
+        
+    def add_weapon(self, weapon):
+        self.__weapons.append(weapon)
+        
+    def show_inventory(self):
+        print(f"\nИнвентарь {self.__name}:")
+        for i, w in enumerate(self.__weapons):
+            print(f" {i+1}. {w.name}")
+            
+    def attack(self, index, monster):
+        if 0 <= index < len(self.__weapons):
+            self.__weapons[index].use(monster)
+        else:
+            print("Нет такого оружия!")
+
+# Проверка
+h = Hunter("Ван Хельсинг")
+h.add_weapon(SilverSword())
+h.add_weapon(HolyWater())
+h.add_weapon(CrossbowBolt())
+h.show_inventory()
+
+z = Zombie("Зомби")
+h.attack(0, z)
+h.attack(1, z)
+h.attack(2, z)
